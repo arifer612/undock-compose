@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "undock-compose"
+version = "0.1.0"
+description = "Convert your unRAID Docker XML templates to Docker Compose YAML files."
+authors = ["Arif Er <arifer612@pm.me>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+PyYAML = "^6.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+epc = "^0.0.5"
+importmagic = "^0.1.7"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
