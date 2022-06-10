@@ -1,0 +1,74 @@
+#+HTML: <a name="top" id="fork-destination-box"></a>
+#+HTML: <a href="https://develop.spacemacs.org"><img src="https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg" alt="Made with Spacemacs"></a>
+#+HTML: <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://upload.wikimedia.org/wikipedia/commons/9/93/GPLv3_Logo.svg" alt="GPLv3 Software" align="right" width="56" height="28"></a>
+#+HTML: <br>
+
+-----
+
+* unDOCK-compose
+
+Easily convert your unRAID Docker XML templates to Docker Compose YAML files.
+
+I made this short script to move my containers from the native unRAID templates
+to the more configurable Docker Compose specifications. The largest reason for
+motivation for doing so is to make use of multiple custom networks, something
+that is not readily available for the plain =docker run= command without a few
+wrappers.
+
+** Setup
+
+Clone this repository:
+#+BEGIN_EXAMPLE
+  git clone https://github.com/arifer612/undock-compose
+  cd undock-compose
+#+END_EXAMPLE
+
+Install the dependencies using =pip=:
+#+BEGIN_EXAMPLE
+  pip install -r requirements.txt
+#+END_EXAMPLE
+
+Or =poetry=:
+#+BEGIN_EXAMPLE
+  poetry install
+#+END_EXAMPLE
+
+** Usage
+
+The help dialog provides a good explanation of how this should be used:
+
+#+BEGIN_SRC shell :results output :exports results
+  poetry run python undock -h
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+usage: undock [-h] [--labels] input [output]
+
+undock-compose v0.1.0 - [Prototype]
+Copyright 2022, Arif Er
+Convert your unRAID Docker XML templates to Docker Compose YAML files.
+
+positional arguments:
+  input         Path to the input XML template file.
+  output        Path to the output YAML file. Defaults to 'docker-
+                compose.yaml' in the same directory as the input.
+
+options:
+  -h, --help    show this help message and exit
+  --labels, -l  Flag to include unRAID Docker labels for configurations
+#+END_EXAMPLE
+
+*** Sample
+
+The following will read the =my-gitea.xml= file and convert it to =gitea-compose.yaml=.
+#+BEGIN_EXAMPLE shell
+  python undock my-gitea.xml gitea-compose.yaml
+#+END_EXAMPLE
+
+The contents of the file can be copied and used in the [[https://forums.unraid.net/topic/114415-plugin-docker-compose-manager/][docker-compose plugin]].
+Otherwise, spinning it up in unRAID can also be done in the terminal if
+=docker-compose= is installed: 
+#+BEGIN_EXAMPLE
+  docker-compose -f gitea-compose.yaml up
+#+END_EXAMPLE
