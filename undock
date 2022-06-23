@@ -10,5 +10,5 @@ from undocker import argparser, UnDocker
 if __name__ == "__main__":
     args, unargs = argparser()
 
-    container = UnDocker(args.xml, args.compose, args.labels)
+    container = UnDocker(args.input[0], args.output, args.labels)
     container.compose()
