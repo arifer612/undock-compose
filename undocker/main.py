@@ -10,7 +10,7 @@ import yaml
 __author__ = "Arif Er"
 __copyright__ = "Copyright 2022, Arif Er"
 __license__ = "GNU General Public License Version 3 (GPL-3.0)"
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __status__ = "Prototype"
 
 
@@ -44,8 +44,13 @@ class UnDocker:
         .. Returns:
         :return: The tag's text, if any.
         """
+
+        if not isinstance(self.tree.find(tag), ET.Element):
+            return ""
+
         if self.tree.find(tag).text:
             return str(self.tree.find(tag).text)
+
         return ""
 
     def _unraid_labels(self) -> dict:
